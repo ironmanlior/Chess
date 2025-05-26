@@ -1,0 +1,35 @@
+<UserInfo>:
+    
+    orientation: "horizontal"
+    color: ""
+    
+    GameClock:
+        id: clock
+        color: root.color
+    Widget:
+    MDBoxLayout:
+        canvas.before:
+            Color:
+                rgba: (0, 0, 0, 0)
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        MDBoxLayout:
+            orientation: "horizontal"
+            Label:
+                color: (1, 1, 1, 1)
+                text: root.rating
+                font_size: 14
+                halign: "center"
+                valign: "center"
+            Label:
+                color: (1, 1, 1, 1)
+                text: root.username
+                font_size: 18
+                halign: "center"
+                valign: "center"
+    Image:
+        size_hint: None, None
+        height: self.height if self.height <= self.width else self.width
+        width: self.width if self.height <= self.width else self.height
+        opacity: 0

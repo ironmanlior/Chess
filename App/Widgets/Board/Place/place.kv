@@ -1,0 +1,12 @@
+<PlaceLayout>:
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: root.pos
+            size: root.size
+            source: root.source
+    on_release: self.parent.on_release(self)
+    on_press: self.parent.on_press(self)
+
+    background_color: 0, 0, 0, 0

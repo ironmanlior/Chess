@@ -1,0 +1,59 @@
+
+<Moves@Screen>:
+    game_update: None
+    board: None
+    name: "moves"
+    MDBoxLayout:
+        orientation: 'vertical'
+        ScrollView:
+            do_scroll_x: False
+            do_scroll_y: True
+            size_hint: 1, .6
+            MovesHistory:
+                id: history
+                future: future
+                past: past
+                root: root
+                game: root.game_update
+                board: root.board
+                size_hint: 1, None
+                height: self.minimum_height
+        MDBoxLayout:
+            orientation: 'vertical'
+            size_hint_y: .4
+            MDBoxLayout:
+                orientation: 'horizontal'
+                pos_hint: {'center_x': .5}
+                spacing: "10dp"
+                Widget:
+                MDIconButton:
+                    canvas.before:
+                        Color:
+                            rgba:[0, 0, 0, 0]
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+                    id: past
+                    icon: "arrow-left-thick"
+                    disabled: True
+                    on_release: history.undo_move()
+                MDIconButton:
+                    canvas.before:
+                        Color:
+                            rgba:[0, 0, 0, 0]
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+                    id: future
+                    icon: "arrow-right-thick"
+                    disabled: True
+                    on_release: history.add_move()
+                Widget:
+            MDBoxLayout:
+                orientation: 'horizontal'
+                Widget:
+                MDIconButton:
+                    id: menu_button
+                    icon: "menu"
+                    on_release: history.open_menu()
+                Widget:

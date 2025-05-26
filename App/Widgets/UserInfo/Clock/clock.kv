@@ -1,0 +1,25 @@
+
+<GameClock>:
+    canvas.before:
+        Color:
+            rgb: (1, 1, 1) if root.color == "white" else (0, 0, 0)
+        Rectangle:
+            pos: root.pos
+            size: root.size
+    MDBoxLayout:
+        orientation: 'horizontal'
+        MDLabel:
+            halign: "center"
+            valign: "center"
+            font_size: 24
+            text: root.text
+            theme_text_color: "Custom"
+            font_name: './App/Pages/Game/UserInfo/Clock/Lcd.ttf'
+            markup: True
+            text_color: (0, 0, 0, 1) if root.color == "white" else (1, 1, 1, 1)
+        MDIcon:
+            icon: root.icon
+            halign: "center"
+            font_size: 18
+            #theme_text_color: "Custom"
+            color: (0, 0, 0, 1) if root.color == "white" else (1, 1, 1, 1)

@@ -1,0 +1,132 @@
+<GameTime>:
+    orientation: 'vertical'
+    elevation: 10
+    padding: dp(50)
+    spacing: dp(40)
+    pos_hint: {"center_x": .5, "center_y": .5}
+    size_hint_y: None
+    height: self.minimum_height + self.spacing * len(self.children) + dp(50)
+    MDLabel:
+        text: "no timer"
+        font_style: "H1"
+    MDStackLayout:
+        id: timeless
+        orientation: 'lr-tb'
+        MyChip:
+            text: "no timer"
+            active: True
+            on_active: root.removes_marks_all_chips(self)
+    MDLabel:
+        text: "lighting"
+        font_style: "H1"
+    MDStackLayout:
+        id: lighting
+        orientation: 'lr-tb'
+        MyChip:
+            text: "1 min"
+            on_active: root.removes_marks_all_chips(self)
+        MyChip:
+            text: "1|1 min"
+            on_active: root.removes_marks_all_chips(self)
+        MyChip:
+            text: "1|2 min"
+            on_active: root.removes_marks_all_chips(self)
+        MyChip:
+            text: "2|3 min"
+            on_active: root.removes_marks_all_chips(self)
+        MyChip:
+            text: "3 min"
+            on_active: root.removes_marks_all_chips(self)
+        MyChip:
+            text: "5 min"
+            on_active: root.removes_marks_all_chips(self)
+        MyChip:
+            text: "5|5 min"
+            on_active: root.removes_marks_all_chips(self)
+    MDLabel:
+        text: "quick"
+        font_style: "H1"
+    MDStackLayout:
+        id: quick
+        orientation: 'lr-tb'
+        MyChip:
+            text: "10 min"
+            on_active: root.removes_marks_all_chips(self)
+        MyChip:
+            text: "10|15 min"
+            on_active: root.removes_marks_all_chips(self)
+        MyChip:
+            text: "20 min"
+            on_active: root.removes_marks_all_chips(self)
+        MyChip:
+            text: "30 min"
+            on_active: root.removes_marks_all_chips(self)
+        MyChip:
+            text: "45|45 min"
+            on_active: root.removes_marks_all_chips(self)
+        MyChip:
+            text: "60 min"
+            on_active: root.removes_marks_all_chips(self)
+    MDBoxLayout:
+        id: expansion_panel
+    MDLabel:
+        text: "daily"
+        font_style: "H1"
+    MDStackLayout:
+        id: daily
+        orientation: 'lr-tb'
+        MyChip:
+            text: "1 day"
+            on_active: root.removes_marks_all_chips(self)
+        MyChip:
+            text: "2 days"
+            on_active: root.removes_marks_all_chips(self)
+        MyChip:
+            text: "3 days"
+            on_active: root.removes_marks_all_chips(self)
+        MyChip:
+            text: "5 days"
+            on_active: root.removes_marks_all_chips(self)
+        MyChip:
+            text: "7 days"
+            on_active: root.removes_marks_all_chips(self)
+        MyChip:
+            text: "14 days"
+            on_active: root.removes_marks_all_chips(self)
+    MDExpansionPanel:
+        icon: "logo.png"
+        content: CustomTimeSetter()
+        panel_cls: MDExpansionPanelOneLine(text="Secondary text")
+
+<CustomTimeSetter>:
+    orientation: 'vertical'
+    elevation: 10
+    spacing: dp(40)
+    MDLabel:
+        id: label
+        text: str(round(minutes.value)) + " : " + str(round(seconds.value))
+        valign: 'center'
+        halign: 'center'
+        font_size: 20
+        pos_hint: {'center_x': .5,'center_y': .5}
+    MDSlider:
+        size_hint_x: .7
+        pos_hint: {'center_x': .5,'center_y': .5}
+        id: minutes
+        min: 0
+        max: 59
+        value: round(self.value)
+        hint: False
+        on_active: root.update(seconds.value, self.value)
+    MDSlider:
+        size_hint_x: .7
+        pos_hint: {'center_x': .5,'center_y': .5}
+        id: seconds
+        min: 0
+        max: 59
+        value: round(self.value)
+        hint: False
+        on_active: root.update(self.value, minutes.value)
+    MDRoundFlatButton:
+        text: "Set"
+        on_release: root.cancel()

@@ -1,0 +1,45 @@
+<CustomMenu>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        elevation: 10
+        padding: dp(50)
+        pos_hint: {"center_x": .5, "center_y": .5}
+        MDLabel:
+            text: f"Game Settings"
+            valign: 'center'
+            halign: 'center'
+            font_size: 40
+            font_style: "H1"
+            pos_hint: {'center_x': .5,'center_y': .5}
+        
+        MDLabel:
+            text: f"Game Type: {root.__class__.__name__[:-4]}"
+            font_size: 24
+            valign: 'center'
+            halign: 'center'
+            pos_hint: {'center_x': .5,'center_y': .5}
+
+        MDBoxLayout:
+            canvas.before:
+                Color:
+                    rgba: [200/255, 200/255, 200/255]
+                RoundedRectangle:
+                    radius: 10
+                    pos: self.pos
+                    size: self.size
+            orientation: 'vertical'
+            id: expansion_panel
+            MDLabel:
+                id: label
+                text: str(minutes.value) + " : " + str(seconds.value)
+                valign: 'center'
+                halign: 'center'
+                font_size: 20
+                pos_hint: {'center_x': .5,'center_y': .5}
+        
+        MDRoundFlatButton:
+            text: "Play"
+            radius: 10
+            on_release: root.submit()
+        Widget:
+            size_hint_y: .1

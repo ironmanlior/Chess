@@ -1,0 +1,12 @@
+<BoardLayout>:
+    id: board
+    canvas.before:
+        Color:
+            rgb: 1, 1, 1
+        Rectangle:
+            pos: root.pos
+            size: root.size
+            source: "./App/Media/Board/board.png"
+    height: self.width
+    col_default_height: self.width / 8
+    row_default_height: self.height / 8

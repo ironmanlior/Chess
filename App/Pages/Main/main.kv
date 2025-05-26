@@ -1,0 +1,28 @@
+<Main>:
+    #base1: None
+    MDBoxLayout:
+        orientation: 'vertical'
+        MDLabel:
+            text: 'Main Page'
+            halign: 'center'
+            valign: "center"
+            font_size: "40dp"
+        MDBoxLayout:
+            orientation: 'horizontal'
+            spacing: "10dp"
+            Widget:
+            MDRoundFlatButton:
+                text: "Sign-In"
+                font_size: "20dp"
+                halign: 'center'
+                valign: "center"
+                pos_hint: {'center_x': 1,'center_y': .5}
+                on_release: root.open_sign_in()
+            MDRoundFlatButton:
+                text: "Sign-Up"
+                font_size: "20dp"
+                halign: 'center'
+                valign: "center"
+                pos_hint: {'center_x': 1,'center_y': .5}
+                on_release: root.open_sign_up()
+            Widget:

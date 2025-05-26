@@ -1,0 +1,49 @@
+<GamePage>:
+    MDBoxLayout:
+        orientation:'horizontal'
+        pos_hint: {'center_x': .5, "center_y": .5}
+        size_hint: 1, 1
+        MDBoxLayout:
+            orientation:'vertical'
+            spacing: '20dp'
+            UserInfo:
+                id: rival_info
+                size_hint_y: .2
+            MDBoxLayout:
+                orientation:'horizontal'
+                Widget:
+                    size_hint_x: .2
+                BoardLayout:
+                    id: board
+                    height: self.height if self.height <= self.width else self.width
+                    width: self.height if self.height <= self.width else self.width
+                Widget:
+                    size_hint_x: .2
+            UserInfo:
+                id: user_info
+                size_hint_y: .2
+        MDBoxLayout:
+            orientation:'vertical'
+            size_hint_x: .4
+            MDBoxLayout:
+                orientation:'horizontal'
+                size_hint_y: .1
+                MDRaisedButton:
+                    text: "Moves"
+                    size_hint: 1, 1
+                    on_release: info.current = "moves"
+                MDRaisedButton:
+                    text: "Chat"
+                    size_hint: 1, 1
+                    on_release: info.current = "chat"
+            MDBoxLayout:
+                orientation: 'vertical'
+                ScreenManager:
+                    id: info
+                    Moves:
+                        id: moves
+                        board: board
+                    Chat:
+                        id: chat
+                Widget:
+                    size_hint_y: .2

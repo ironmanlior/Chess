@@ -1,0 +1,26 @@
+<Menu>:
+    name: "menu"
+    MDStackLayout:
+        orientation: 'lr-tb'
+        spacing: 15, 15
+        ImageButton:
+            source: "./App/Media/Board/board.png"
+            on_release: root.open_dialog()
+        
+        ImageButton:
+            source: "./App/Media/Board/board.png"
+            on_release: root.open_dialog()
+        
+        ImageButton:
+            source: "./App/Media/Board/board.png"
+            on_release: root.open_dialog()
+        
+        ImageButton:
+            source: "./App/Media/Board/board.png"
+            on_release: root.open_dialog()
+
+<ImageButton@ButtonBehavior+Image>:
+    size_hint: .5,.2
+    allow_stretch: True
+    keep_ratio: True
+    source: ""

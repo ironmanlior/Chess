@@ -1,0 +1,52 @@
+<Chat@MDScreen>:
+    name: "chat"
+    MDBoxLayout:
+        orientation: "vertical"
+        ScrollView:
+            size_hint_y: .85
+            HistoryView:
+                id: chat_history
+                orientation: "vertical"
+                size_hint_y: None
+                height: self.minimum_height
+        MDRelativeLayout:
+            size_hint_y: .15
+            MDTextField:
+                hint_text: "Write Message"
+                mode: "fill"
+                id: chat_input
+                size_hint_x: .8
+                size_hint_y: None
+                height: self.parent.height
+                font_size: 18
+                multiline: False
+                on_text_validate: 
+                    chat_history.send(self.text)
+                    self.text = ""
+            MDIconButton:
+                icon: "send"
+                on_release: 
+                    chat_history.send(chat_input.text)
+                    chat_input.text = ""
+                pos_hint: {"center_y": .5}
+                pos: chat_input.width - self.width + dp(8), 0
+                theme_text_color: "Hint"
+
+
+<MessageBox@MDLabel>:
+    canvas.before:
+        Color:
+            rgba: (.4, .4, .4, 1) if not root.is_sender else app.theme_cls.primary_color
+        RoundedRectangle:
+            radius: [7]
+            pos: root.pos
+            size: root.size
+    theme_text_color: "Custom"
+    text_color: .9, .9, .9, 1
+    halign: "right" if root.is_sender else "left"
+    pos_hint: {'right': 1} if root.is_sender else {'x': 0}
+    size_hint_x: None if root.width * .6 > self.texture_size[0] else .6
+    width: self.texture_size[0]
+    size_hint_y: None
+    height: self.texture_size[1]
+    

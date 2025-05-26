@@ -1,0 +1,198 @@
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+
+#:set ripple_color get_color_from_hex("#c5bdd2")
+#:set bg_color get_color_from_hex("#f7f4e7")
+#:set selected_color get_color_from_hex("#0c6c4d")
+
+Base:
+
+<Base>:
+    username: "Main"
+    nav_drawer: logout_nav_drawer
+    orientation: 'vertical'
+    MDNavigationLayout:
+        ScreenManager:
+            MDScreen:
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    MDToolbar:
+                        id: toolbar
+                        title: root.username
+                        left_action_items: [["menu", lambda x: root.nav_drawer.set_state("open")]]
+                        right_action_items: [["arrow-left-circle", root.next_screen], ["arrow-right-circle", root.prev_screen]]
+                        elevation: 10
+                    ScreenManager:
+                        id: login
+                        Main:
+                            # logout
+                            name: "main"
+                            on_enter: root.nav_drawer = logout_nav_drawer
+                            id: main
+                            base: root
+                        MDScreen:
+                            # login
+                            name: "login"
+                            on_enter: root.nav_drawer = login_nav_drawer
+                            ScreenManager:
+                                id: pages
+                                Menu:
+                                    name: "menu"
+                                MDScreen:
+                                    name: "online"
+                                    ScreenManager: 
+                                        id: online
+                                        GameMenu:
+                                            name: "menu"
+                                        GamePage:
+                                            name: "game"
+                                MDScreen:
+                                    name: "minimax"
+                                    ScreenManager:
+                                        id: minimax
+                                        MinimaxMenu:
+                                            name: "menu"
+                                        MinimaxPage:
+                                            name: "game"
+                                MDScreen:
+                                    name: "dnn"
+                                    ScreenManager:
+                                        id: dnn
+                                        DNNMenu:
+                                            name: "menu"
+                                        DNNPage:
+                                            name: "game"
+                                MDScreen:
+                                    name: "custom"
+                                    ScreenManager:
+                                        id: custom
+                                        CustomMenu:
+                                            name: "menu"
+                                        CustomPage:
+                                            name: "game"
+                                EditorPage:
+                                    name: "write"
+
+        MDNavigationDrawer:
+            id: logout_nav_drawer
+            radius: (0, 16, 16, 0) if self.anchor == "left" else (16, 0, 0, 16)
+            # md_bg_color: app.theme_cls.accent_color
+            MDNavigationDrawerMenu:
+                MDNavigationDrawerHeader:
+                    title: "Chess"
+                    title_color: app.theme_cls.primary_color
+                    text: ""
+                    spacing: "4dp"
+                    padding: "12dp", 0, 0, "56dp"
+                MDNavigationDrawerDivider:
+                MDNavigationDrawerLabel:
+                    text: "Log In"
+                DrawerItem:
+                    icon: "login-variant"
+                    text: "Sign In"
+                    on_release: main.open_sign_in()
+                DrawerItem:
+                    icon: "account-plus"
+                    text: "Sign Up"
+                    on_release: main.open_sign_up()
+
+        MDNavigationDrawer:
+            id: login_nav_drawer
+            radius: (0, 16, 16, 0) if self.anchor == "left" else (16, 0, 0, 16)
+            # md_bg_color: app.theme_cls.accent_color
+            MDNavigationDrawerMenu:
+                MDNavigationDrawerHeader:
+                    title: "Chess"
+                    title_color: app.theme_cls.primary_color
+                    text: root.username
+                    spacing: "4dp"
+                    padding: "12dp", 0, 0, "56dp"
+                
+                MDNavigationDrawerDivider:
+                MDNavigationDrawerLabel:
+                    text: "Profile"
+                DrawerItem:
+                    icon: "chart-bell-curve"
+                    text: "Statistics"
+                    on_release: pass
+
+                MDNavigationDrawerDivider:
+                MDNavigationDrawerLabel:
+                    text: "Online"
+                DrawerItem:
+                    icon: "checkerboard"
+                    text: "Play"
+                    on_release: pages.current = "online"
+                
+                MDNavigationDrawerDivider:
+                MDNavigationDrawerLabel:
+                    text: "A.I."
+                DrawerItem:
+                    icon: "google-assistant"
+                    text: "Minimax"
+                    on_release: pages.current = "minimax"
+                DrawerItem:
+                    icon: "dna"
+                    text: "Deep Neural Network"
+                    on_release: pages.current = "dnn"
+                DrawerItem:
+                    icon: "file-code"
+                    text: "Custom A.I."
+                    on_release: pages.current = "custom"
+
+                MDNavigationDrawerDivider:
+                MDNavigationDrawerLabel:
+                    text: "Editor"
+                DrawerItem:
+                    icon: "application-braces"
+                    text: "Write Custom A.I."
+                    on_release: pages.current = "write"
+
+                MDNavigationDrawerDivider:
+                MDNavigationDrawerLabel:
+                    text: "Log Out"
+                DrawerItem:
+                    icon: "logout-variant"
+                    text: "Log Out"
+                    on_release: login.current = "main"
+
+<DrawerItem@MDNavigationDrawerItem>
+    # focus_color: selected_color
+    # unfocus_color: app.theme_cls.accent_color
+    text_color: app.theme_cls.primary_color
+    icon_color: app.theme_cls.primary_color
+    ripple_color: ripple_color
+    selected_color: selected_color # app.theme_cls.opposite_bg_normal
+
+
+
+
+
+
+
+
+
+
+
+
+# MDBottomNavigation:
+#     MDBottomNavigationItem:
+#         name: "screen 1"
+#         text: "Online"
+#         icon: "language-python"
+#         ScreenManager:
+#             id: screens
+#             current: root.current
+#             Main:
+#             Menu:
+#             GamePage:
+    
+#     MDBottomNavigationItem:
+#         name: "screen 2"
+#         text: "A.I."
+#         icon: "language-python"
+        
+    
+#     MDBottomNavigationItem:
+#         name: "screen 3"
+#         text: "Learn"
+#         icon: "language-python"
